@@ -36,5 +36,6 @@ int game_interface(char **map);
 char *cmd_line();
 char *prompt(void);
 int err_message(const char *string);
+void update_map(char **map, char *msg);
 
 #endif /* !MORPION_H */

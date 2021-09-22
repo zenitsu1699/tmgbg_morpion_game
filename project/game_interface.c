@@ -61,16 +61,29 @@ char *cmd_line()
     return msg;
 }
 
+void update_map(char **map, char *msg)
+{
+    int cc1 = 0;
+    int cc2 = 0;
+
+    msg[0] = msg[0] - 49;
+    cc1 = msg[0] - 48;
+    cc2 = msg[2] - 48;
+    cc2 = cc2 - 1;
+    map[cc1][cc2] = 'o';
+}
+
 int game_interface(char **map)
 {
     char *msg = NULL;
 
-    // while (42) {
+    while (42) {
         display_map(map);
         msg = cmd_line();
         printf("%s\n", msg);
-        // update_map(map, msg);
-    // }
+        update_map(map, msg);
+        // display_map(map);
+    }
     free(msg);
     return 0;
 }

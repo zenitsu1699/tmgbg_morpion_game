@@ -24,9 +24,9 @@ char **new_location(int line, int column)
 
 void display_map(char **map)
 {
-    int o = 0;
+    int o = 97;
 
-    printf(" a b c\n");
+    printf(" 1 2 3\n");
     // printf("_ _ _\n");
     for (int k = 0; k < LINE; k++) {
         for (int l = 0; l < COL; l++)
@@ -35,7 +35,7 @@ void display_map(char **map)
         for (int l = 0; l < COL; l++) {
             printf("|");
             printf("%c", map[k][l]); }
-        printf("| (%d)\n", o+1);
+        printf("| (%c)\n", o);
         o++; }
 }
 
