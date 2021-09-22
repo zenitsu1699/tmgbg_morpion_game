@@ -12,6 +12,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define LINE 3
+#define COL 3
+
 #endif
 
 
@@ -20,5 +23,8 @@
 
 void instruction(void);
 int usage(int ac, char **av);
+void free_location(char **map);
+void display_map(char **map);
+char **new_location(int line, int column);
 
 #endif /* !MORPION_H */
