@@ -48,5 +48,8 @@ int all_err_gaming(char **map, char *msg);
 int err_mapping(char **map, char *msg);
 
 int two_player_game(data_map *mymap);
+int winner_case(char **map);
+int winner_case_outside(char **map);
+int winner_case_inside(char **map);
 
 #endif /* !MORPION_H */
