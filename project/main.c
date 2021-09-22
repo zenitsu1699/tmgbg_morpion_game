@@ -18,7 +18,7 @@ int main(int ac, char **av)
 
     if (usage(ac, av)) return 84;
     map = new_location(LINE, COL);
-    display_map(map);
+    game_interface(map);
     free_location(map);
     return 0;
 }
