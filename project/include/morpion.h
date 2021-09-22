@@ -19,6 +19,13 @@
 #include <stddef.h>
 #include <fcntl.h>
 
+#define TOOL_1 'o'
+#define TOOL_2 'x'
+
+typedef struct morpion_map {
+    char **map;
+    int case_empty;
+} data_map;
 
 
 #endif
@@ -29,13 +36,17 @@
 
 void instruction(void);
 int usage(int ac, char **av);
-void free_location(char **map);
+void free_location(data_map *mymap);
 void display_map(char **map);
-char **new_location(int line, int column);
-int game_interface(char **map);
-char *cmd_line();
+data_map *new_location(int line, int column);
+int game_interface(data_map *mymap, const char *string, char tool);
+char *cmd_line(char **map);
 char *prompt(void);
 int err_message(const char *string);
-void update_map(char **map, char *msg);
+void update_map(data_map *mymap, char *msg, char tool);
+int all_err_gaming(char **map, char *msg);
+int err_mapping(char **map, char *msg);
+
+int two_player_game(data_map *mymap);
 
 #endif /* !MORPION_H */

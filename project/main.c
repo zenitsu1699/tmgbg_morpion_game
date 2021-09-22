@@ -14,11 +14,12 @@ int morpion_game(void)
 
 int main(int ac, char **av)
 {
-    char **map = NULL;
+    // char **map = NULL;
+    data_map *mymap;
 
     if (usage(ac, av)) return 84;
-    map = new_location(LINE, COL);
-    game_interface(map);
-    free_location(map);
+    mymap = new_location(LINE, COL);
+    two_player_game(mymap);
+    free_location(mymap);
     return 0;
 }

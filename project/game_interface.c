@@ -7,29 +7,6 @@
 
 #include "./include/morpion.h"
 
-int err_message(const char *string)
-{
-    if (string == NULL) return 1;
-    else if (strlen(string) < 3) {
-        printf("Is enough big.\n");
-        return 1; }
-    else if (strlen(string) > 3) {
-        printf("Is too big.\n");
-        return 1; }
-    else {
-        if (string[0] < 'a' || string[0] > 'c') {
-            printf("Bad line.\n");
-            return 1; }
-        else if (string[1] != ' ') {
-            printf("Print %c %c between line and column.\n", '"', '"');
-            return 1; }
-        else if (string[2] < '1' || string[2] > '3') {
-            printf("Bad column.\n");
-            return 1; }
-    }
-    return 0;
-}
-
 char *prompt(void)
 {
     char *msg = NULL;
@@ -49,11 +26,11 @@ char *prompt(void)
     return msg;
 }
 
-char *cmd_line()
+char *cmd_line(char **map)
 {
     char *msg = NULL;
 
-    while (err_message(msg) != 0) {
+    while (all_err_gaming(map, msg) != 0) {
         free(msg);
         printf("Your turn : ");
         msg = prompt();
@@ -61,7 +38,7 @@ char *cmd_line()
     return msg;
 }
 
-void update_map(char **map, char *msg)
+void update_map(data_map *mymap, char *msg, char tool)
 {
     int cc1 = 0;
     int cc2 = 0;
@@ -70,20 +47,20 @@ void update_map(char **map, char *msg)
     cc1 = msg[0] - 48;
     cc2 = msg[2] - 48;
     cc2 = cc2 - 1;
-    map[cc1][cc2] = 'o';
+    mymap->map[cc1][cc2] = tool;
+    mymap->case_empty--;
+    msg[0] = msg[0] + 49;
 }
 
-int game_interface(char **map)
+int game_interface(data_map *mymap, const char *string, char tool)
 {
     char *msg = NULL;
 
-    while (42) {
-        display_map(map);
-        msg = cmd_line();
-        printf("%s\n", msg);
-        update_map(map, msg);
-        // display_map(map);
-    }
+    printf("%s must play now\n", string);
+    msg = cmd_line(mymap->map);
+    update_map(mymap, msg, tool);
+    display_map(mymap->map);
+    printf("The player has play at position (%c, %c)\n", msg[0], msg[2]);
     free(msg);
     return 0;
 }
